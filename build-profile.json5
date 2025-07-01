@@ -1,0 +1,55 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/bilibili/.ohos/config/default_MyApplication8_A7RTsIYt1v1gaN3FyhGSRx4oxXC2q5igZreElK_YYI0=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B7B4D661F2FB94C685E6EC37C56D9B89C28EB1D0B6B8E4B64274A07B35B409905F348DD5EFB2217",
+          "profile": "/Users/bilibili/.ohos/config/default_MyApplication8_A7RTsIYt1v1gaN3FyhGSRx4oxXC2q5igZreElK_YYI0=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/bilibili/.ohos/config/default_MyApplication8_A7RTsIYt1v1gaN3FyhGSRx4oxXC2q5igZreElK_YYI0=.p12",
+          "storePassword": "0000001BB04F35857A5437BA7E02D13F7BDDE9C824EC3E44EFC4432DEFA2843C9458E270CB659B41B36C5F"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.3(15)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
