@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(NATIVERENDER_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 ADD_DEFINITIONS(-DVK_USE_PLATFORM_OHOS=1)
+find_library(rawfile-lib rawfile.z REQUIRED)
 
 if(DEFINED PACKAGE_FIND_FILE)
     include(${PACKAGE_FIND_FILE})
@@ -21,4 +22,5 @@ target_link_libraries(entry PUBLIC
     libnative_window.so
     libvulkan.so
     libhilog_ndk.z.so
+    rawfile.z
 )

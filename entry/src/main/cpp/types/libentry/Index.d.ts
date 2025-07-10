@@ -1,4 +1,6 @@
-export const run: () => void;
+import type resourceManager from '@ohos.resourceManager';
+
+export const run: (resourceManager: resourceManager.ResourceManager) => void;
 type XComponentContextStatus = {
   hasDraw: boolean,
   hasChangeColor: boolean,

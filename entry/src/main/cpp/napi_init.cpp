@@ -25,6 +25,7 @@ static napi_value Init(napi_env env, napi_value exports)
     OH_NativeXComponent_GetXComponentId(nativeXComponent, idStr, &idSize);
     
     callback.OnSurfaceCreated = HelloTriangleApp::OnSurfaceCreatedCB;
+    callback.OnSurfaceDestroyed = HelloTriangleApp::OnDestroyCB;
     OH_NativeXComponent_RegisterCallback(nativeXComponent, &callback);
     return exports;
 }
