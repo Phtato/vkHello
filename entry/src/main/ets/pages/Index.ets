@@ -1,6 +1,8 @@
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import testNapi from 'libentry.so';
 import { common } from '@kit.AbilityKit';
+import { taskpool } from '@kit.ArkTS';
+import fs from '@ohos.file.fs';
 
 /*class MyXComponentController extends XComponentController {
   onSurfaceCreated(surfaceId: string): void {
@@ -27,13 +29,23 @@ function render(context : common.UIAbilityContext){
 }
 
 @Entry
-@Component
+@ComponentV2
 struct Index {
   context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  @Local buttonStatus: boolean = true;
 
   aboutToAppear(): void {
+/*    // Copy squid.json to hap sandbox
+    let path = getContext(this).filesDir;
+    if (!fs.accessSync(path)) {
+      fs.mkdirSync(path);
+    }
 
+    let buffer = getContext(this).resourceManager.getRawFileContentSync('squid.json');
+    let file = fs.openSync(path + '/squid.json', fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+    fs.writeSync(file.fd, buffer.buffer);*/
   }
+
 
   build() {
     Row() {
@@ -59,8 +71,11 @@ struct Index {
           top: 20
         })
         .onClick(async () => {
-          await render(this.context);
+          taskpool.execute(render,this.context);
+          this.buttonStatus = false;
         })
+        .enabled(this.buttonStatus)
+
       }
       .width('100%')
     }
