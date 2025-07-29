@@ -44,6 +44,20 @@ file(CONFIGURE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/check_files.cmake"
   @ONLY
 )]]
 
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/../resources/rawfile/vert.spv ${CMAKE_CURRENT_SOURCE_DIR}/../resources/rawfile/frag.spv
+    COMMAND glslc -fshader-stage=vert ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.vert -o ${CMAKE_CURRENT_SOURCE_DIR}/../resources/rawfile/vert.spv
+    COMMAND glslc -fshader-stage=frag ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.frag -o ${CMAKE_CURRENT_SOURCE_DIR}/../resources/rawfile/frag.spv
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.vert ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.frag
+    COMMENT "Compiling shaders..."
+)
+
+MESSAGE(STATUS "Compiling shaders...")
+
+add_custom_target(CompileShaders ALL
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../resources/rawfile/vert.spv ${CMAKE_CURRENT_SOURCE_DIR}/../resources/rawfile/frag.spv
+)
+
 set(NATIVERENDER_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 set(GLM_PATH /usr/local/opt/glm/include)
 ADD_DEFINITIONS(-DVK_USE_PLATFORM_OHOS=1)
@@ -55,8 +69,8 @@ endif()
 
 include_directories(${NATIVERENDER_ROOT_PATH}
                     ${NATIVERENDER_ROOT_PATH}/include
-                    ${GLM_PATH})
-
+                    ${GLM_PATH}
+                    "/Users/bilibili/Desktop/stb_image/stb")
 
 add_library(entry SHARED napi_init.cpp)
 target_link_libraries(entry PUBLIC

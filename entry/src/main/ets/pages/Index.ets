@@ -71,10 +71,14 @@ struct Index {
           top: 20
         })
         .onClick(async () => {
+          //taskpool.execute(render,this.context);
+          //this.buttonStatus = false;
+        })
+        .enabled(this.buttonStatus)
+        .onAppear(()=>{
           taskpool.execute(render,this.context);
           this.buttonStatus = false;
         })
-        .enabled(this.buttonStatus)
 
       }
       .width('100%')

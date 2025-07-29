@@ -10,7 +10,7 @@
     // "typeCheck": false,                      /* Enable typeCheck. Value: [ true | false ]. Default: false */
   },
   "logging": {
-    // "level": "info"                          /* Define the log level. Value: [ "debug" | "info" | "warn" | "error" ]. Default: "info" */
+    "level": "info"                          /* Define the log level. Value: [ "debug" | "info" | "warn" | "error" ]. Default: "info" */
   },
   "debugging": {
     // "stacktrace": false                      /* Disable stacktrace compilation. Value: [ true | false ]. Default: false */
