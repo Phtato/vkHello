@@ -3,29 +3,24 @@ import testNapi from 'libentry.so';
 import { common } from '@kit.AbilityKit';
 import { taskpool } from '@kit.ArkTS';
 import fs from '@ohos.file.fs';
-
-/*class MyXComponentController extends XComponentController {
-  onSurfaceCreated(surfaceId: string): void {
-    console.log(`onSurfaceCreated surfaceId: ${surfaceId}`)
-    //testNapi.SetSurfaceId(BigInt(surfaceId));
-  }
-
-*/
-/*  onSurfaceChanged(surfaceId: string, rect: SurfaceRect): void {
-    console.log(`onSurfaceChanged surfaceId: ${surfaceId}, rect: ${JSON.stringify(rect)}}`)
-    // 在onSurfaceChanged中调用ChangeSurface绘制内容
-    testNapi.ChangeSurface(BigInt(surfaceId), rect.surfaceWidth, rect.surfaceHeight)
-  }
-
-  onSurfaceDestroyed(surfaceId: string): void {
-    console.log(`onSurfaceDestroyed surfaceId: ${surfaceId}`)
-    testNapi.DestroySurface(BigInt(surfaceId))
-  }*/ /*
-}*/
+import { BusinessError } from '@kit.BasicServicesKit';
+import fileIo from '@ohos.file.fs';
 
 @Concurrent
-function render(context : common.UIAbilityContext){
+function render(context: common.UIAbilityContext) {
+  //prepare
+  let sandboxPath = context.filesDir;
+  console.log("tujiaming", `${sandboxPath}`);
+  testNapi.transferSandboxPath(sandboxPath);
+
   testNapi.run(context.resourceManager);
+}
+
+@Concurrent
+function prepare(context: common.UIAbilityContext) {
+  //prepare
+  let sandboxPath = context.filesDir;
+  testNapi.transferSandboxPath(sandboxPath);
 }
 
 @Entry
@@ -35,7 +30,7 @@ struct Index {
   @Local buttonStatus: boolean = true;
 
   aboutToAppear(): void {
-/*    // Copy squid.json to hap sandbox
+    // Copy squid.json to hap sandbox
     let path = getContext(this).filesDir;
     if (!fs.accessSync(path)) {
       fs.mkdirSync(path);
@@ -43,9 +38,8 @@ struct Index {
 
     let buffer = getContext(this).resourceManager.getRawFileContentSync('squid.json');
     let file = fs.openSync(path + '/squid.json', fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-    fs.writeSync(file.fd, buffer.buffer);*/
+    fs.writeSync(file.fd, buffer.buffer);
   }
-
 
   build() {
     Row() {
@@ -56,7 +50,7 @@ struct Index {
           .onAttach(() => {
             //testNapi.run(this.context.resourceManager);
           })
-          .onAppear(()=>{
+          .onAppear(() => {
             console.error("tujiaming");
             testNapi.run(this.context.resourceManager);
           })
@@ -71,13 +65,13 @@ struct Index {
           top: 20
         })
         .onClick(async () => {
-          //taskpool.execute(render,this.context);
-          //this.buttonStatus = false;
         })
         .enabled(this.buttonStatus)
-        .onAppear(()=>{
-          taskpool.execute(render,this.context);
+        .onAppear(() => {
           this.buttonStatus = false;
+          let sandboxPath = this.context.filesDir;
+          testNapi.transferSandboxPath(sandboxPath);
+          taskpool.execute(render, this.context);
         })
 
       }

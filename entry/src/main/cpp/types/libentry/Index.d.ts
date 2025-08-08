@@ -1,5 +1,7 @@
 import type resourceManager from '@ohos.resourceManager';
 
+export const transferSandboxPath: (path: string) => void;
+
 export const run: (resourceManager: resourceManager.ResourceManager) => void;
 type XComponentContextStatus = {
   hasDraw: boolean,
