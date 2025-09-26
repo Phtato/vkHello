@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "/Users/bilibili/.ohos/config/default_MyApplication8_A7RTsIYt1v1gaN3FyhGSRx4oxXC2q5igZreElK_YYI0=.cer",
+          "certpath": "/Users/bilibili/.ohos/config/default_vkHello_iaoGaxtAMl_BZPiKLVYU5xMjCX4y7jtjASKBvASEy3k=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B7B4D661F2FB94C685E6EC37C56D9B89C28EB1D0B6B8E4B64274A07B35B409905F348DD5EFB2217",
-          "profile": "/Users/bilibili/.ohos/config/default_MyApplication8_A7RTsIYt1v1gaN3FyhGSRx4oxXC2q5igZreElK_YYI0=.p7b",
+          "keyPassword": "0000001B9C54D3B6F60E2700C1E627CE8BFDD4F8C07014AE79CF92D9BE45004CF48E06B788AEFDC9E8FC44",
+          "profile": "/Users/bilibili/.ohos/config/default_vkHello_iaoGaxtAMl_BZPiKLVYU5xMjCX4y7jtjASKBvASEy3k=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/bilibili/.ohos/config/default_MyApplication8_A7RTsIYt1v1gaN3FyhGSRx4oxXC2q5igZreElK_YYI0=.p12",
-          "storePassword": "0000001BB04F35857A5437BA7E02D13F7BDDE9C824EC3E44EFC4432DEFA2843C9458E270CB659B41B36C5F"
+          "storeFile": "/Users/bilibili/.ohos/config/default_vkHello_iaoGaxtAMl_BZPiKLVYU5xMjCX4y7jtjASKBvASEy3k=.p12",
+          "storePassword": "0000001BE63FE58C3419B0875BE447CBF6674C04E54FD3822F1490A50AB7803299CF7DF917500521B34D32"
         }
       }
     ],
@@ -26,7 +26,8 @@
             "caseSensitiveCheck": true,
             "useNormalizedOHMUrl": true
           }
-        }
+        },
+        "targetSdkVersion": "5.1.1(19)"
       }
     ],
     "buildModeSet": [

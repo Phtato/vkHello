@@ -51,7 +51,6 @@ struct Index {
             //testNapi.run(this.context.resourceManager);
           })
           .onAppear(() => {
-            console.error("tujiaming");
             testNapi.run(this.context.resourceManager);
           })
         Button() {
