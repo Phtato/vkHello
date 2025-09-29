@@ -1069,7 +1069,7 @@ private:
         VkDeviceSize offsets[] = {0};
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
 
-        vkCmdBindIndexBuffer(commandBuffer, indexBuffer, 0, VK_INDEX_TYPE_UINT16);
+        vkCmdBindIndexBuffer(commandBuffer, indexBuffer, 0, VK_INDEX_TYPE_UINT32);
 
         vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1,
                                 &descriptorSets[currentFrame], 0, nullptr);
@@ -1433,7 +1433,7 @@ private:
         }
     }
 
-    std::string loadFileInHarmony(std::string filePath){
+    std::string loadFileInHarmony(std::string filePath) {
         RawFile *rawFile = OH_ResourceManager_OpenRawFile(m_aAssetMgr, filePath.c_str());
         if (!rawFile) {
             throw std::runtime_error("open file failed");
@@ -1447,13 +1447,13 @@ private:
         outputFile.write(reinterpret_cast<const char *>(buffer), fileSize);
         outputFile.close();
         delete[] buffer;
-    
+
         return sandboxPath;
     }
-    
+
     void createTextureImage() {
         std::string sandboxPath = loadFileInHarmony(TEXTURE_PATH);
-    
+
         int texWidth, texHeight, texChannels;
         stbi_uc *pixels = stbi_load(sandboxPath.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
         VkDeviceSize imageSize = texWidth * texHeight * 4;
@@ -1726,20 +1726,23 @@ private:
         std::vector<tinyobj::shape_t> shapes;
         std::vector<tinyobj::material_t> materials;
         std::string warn, err;
-        
+
         std::string sandboxPath = loadFileInHarmony(MODEL_PATH);
-        
+
         if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, sandboxPath.c_str())) {
             throw std::runtime_error(warn + err);
         }
         for (const auto &shape : shapes) {
             for (const auto &index : shape.mesh.indices) {
                 Vertex vertex{};
-                vertex.pos = {attrib.vertices[3 * index.vertex_index + 0], attrib.vertices[3 * index.vertex_index + 1],
-                              attrib.vertices[3 * index.vertex_index + 2]};
-
+                vertex.pos.x = (float)attrib.vertices[3 * index.vertex_index + 0];
+                vertex.pos.y = (float)attrib.vertices[3 * index.vertex_index + 1];
+                vertex.pos.z = (float)attrib.vertices[3 * index.vertex_index + 2];
+                /*                vertex.pos = {attrib.vertices[3 * index.vertex_index + 0], attrib.vertices[3 *
+                   index.vertex_index + 1], attrib.vertices[3 * index.vertex_index + 2]};*/
+                
                 vertex.texCoord = {attrib.texcoords[2 * index.texcoord_index + 0],
-                                   attrib.texcoords[2 * index.texcoord_index + 1]};
+                                   1.0f - attrib.texcoords[2 * index.texcoord_index + 1]};
 
                 vertex.color = {1.0f, 1.0f, 1.0f};
                 vertices.push_back(vertex);
