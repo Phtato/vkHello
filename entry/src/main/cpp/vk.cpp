@@ -12,8 +12,8 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #include <chrono>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 #include <hilog/log.h>
 #include <limits> // Necessary for std::numeric_limits
 #include <native_window/external_window.h>
@@ -26,7 +26,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #define TINYOBJLOADER_IMPLEMENTATION
-#include <tiny_obj_loader.h>
+#include <thirdParty/tinyobjloader/tiny_obj_loader.h>
 
 #define DOMAIN 0x000001
 #define TAG "LOG_ERROR"
@@ -759,9 +759,9 @@ private:
         std::vector<VkDynamicState> dynamicStates = {VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR};
 
         VkPipelineDynamicStateCreateInfo dynamicState{};
-        dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+/*        dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
         dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
-        dynamicState.pDynamicStates = dynamicStates.data();
+        dynamicState.pDynamicStates = dynamicStates.data();*/
 
         auto bindingDescription = Vertex::getBindingDescription();
         auto attributeDescriptions = Vertex::getAttributeDescriptions();
@@ -1434,19 +1434,19 @@ private:
     }
 
     std::string loadFileInHarmony(std::string filePath) {
-        RawFile *rawFile = OH_ResourceManager_OpenRawFile(m_aAssetMgr, filePath.c_str());
+/*        RawFile *rawFile = OH_ResourceManager_OpenRawFile(m_aAssetMgr, filePath.c_str());
         if (!rawFile) {
             throw std::runtime_error("open file failed");
         }
         size_t fileSize = OH_ResourceManager_GetRawFileSize(rawFile);
         uint8_t *buffer = new uint8_t[fileSize];
-        OH_ResourceManager_ReadRawFile(rawFile, buffer, fileSize);
+        OH_ResourceManager_ReadRawFile(rawFile, buffer, fileSize);*/
 
         std::string sandboxPath = HelloVK::path + filePath;
-        std::ofstream outputFile(sandboxPath, std::ios::binary);
+/*        std::ofstream outputFile(sandboxPath, std::ios::binary);
         outputFile.write(reinterpret_cast<const char *>(buffer), fileSize);
         outputFile.close();
-        delete[] buffer;
+        delete[] buffer;*/
 
         return sandboxPath;
     }
