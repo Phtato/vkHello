@@ -10,7 +10,7 @@ import fileIo from '@ohos.file.fs';
 function render(context: common.UIAbilityContext) {
   //prepare
   let sandboxPath = context.filesDir;
-  console.log("tujiaming", `${sandboxPath}`);
+  console.log("Sandbox path:", `${sandboxPath}`);
   testNapi.transferSandboxPath(sandboxPath);
 
   testNapi.run(context.resourceManager);

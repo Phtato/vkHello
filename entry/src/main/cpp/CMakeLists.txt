@@ -70,8 +70,8 @@ endif()
 include_directories(${NATIVERENDER_ROOT_PATH}
                     ${NATIVERENDER_ROOT_PATH}/include
                     ${GLM_PATH}
-                    "/Users/bilibili/Desktop/stb_image/stb"
-                    "~/Library/tinyobjloader")
+                    ${NATIVERENDER_ROOT_PATH}/thirdParty/include/stb
+                    ${NATIVERENDER_ROOT_PATH}/thirdParty/include/tinyobjloader)
 
 add_library(entry SHARED napi_init.cpp)
 target_link_libraries(entry PUBLIC

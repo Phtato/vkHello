@@ -107,7 +107,7 @@ private:
 
     void CreateSurface() {
         if (!m_window) {
-            OH_LOG_ERROR(LOG_APP, "tujiaming m_window is null");
+            OH_LOG_ERROR(LOG_APP, "m_window is null");
             return;
         }
 
@@ -174,7 +174,7 @@ private:
         vkEnumeratePhysicalDevices(m_instance, &deviceCount, nullptr);
 
         if (deviceCount <= 0) {
-            OH_LOG_ERROR(LOG_APP, "tujiaming failed to find GPUs with Vulkan support!");
+            OH_LOG_ERROR(LOG_APP, "Failed to find GPUs with Vulkan support!");
             return;
         }
 
